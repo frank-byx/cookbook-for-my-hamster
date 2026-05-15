@@ -1,0 +1,66 @@
+\documentclass[12pt]{article}
+
+\renewcommand{\familydefault}{\sfdefault}
+\setlength{\parindent}{0pt}
+% \let\oldsection\section
+% \renewcommand{\section}{\clearpage\oldsection}
+% \let\oldsubsection\subsection
+% \renewcommand{\subsection}{\clearpage\oldsubsection}
+
+\usepackage[margin=.75in]{geometry}
+
+\usepackage{etoolbox}
+\AtBeginEnvironment{recipe}{\vspace*{\baselineskip}}
+\AtEndEnvironment{recipe}{\vspace*{\baselineskip}}
+
+\usepackage[nonumber]{cuisine}
+\RecipeWidths{7in}{5cm}{.75cm}{6cm}{1cm}{1.5cm}
+\usepackage{nicefrac}
+
+\usepackage{graphicx}
+\graphicspath{{../img/}}
+
+\usepackage[hidelinks]{hyperref}
+
+% Custom command to link ingredient names to their recipes
+\newcommand{\recref}[1]{\hyperref[rec:#1]{\underline{#1}}}
+
+% Custom command to define recipe name and create header with label
+\newcommand{\recdef}[1]{\newcommand{\recname}{#1}\subsection{\recname}\label{rec:\recname}}
+
+% Custom environment for recipes
+\newenvironment{rec}{\begin{recipe}{\recname}{}{}}{\end{recipe}}
+
+\usepackage{subfiles}
+\ifSubfilesClassLoaded{\setcounter{secnumdepth}{0}}{}
+
+\usepackage{minitoc}
+\nostcrule
+\renewcommand{\stctitle}{}
+\renewcommand{\stifont}{\large\sffamily}
+\renewcommand{\stcfont}{\small\sffamily}
+\renewcommand{\stcSSfont}{\small\sffamily}
+\renewcommand{\stcSSSfont}{\small\sffamily}
+
+\begin{document}
+
+\dosecttoc
+
+\subfile{title}
+
+\newpage
+\tableofcontents
+
+\newpage
+\subfile{intro}
+
+\newpage
+\subfile{components}
+
+\newpage
+\subfile{core_ingredients}
+
+\newpage
+\subfile{recipes}
+
+\end{document}
